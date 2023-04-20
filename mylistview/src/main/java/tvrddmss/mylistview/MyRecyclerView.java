@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -95,6 +96,8 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
         paddingLeft = this.getPaddingLeft();
         paddingRight = this.getPaddingRight();
 
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext());
+        this.setLayoutManager(linearLayoutManager);
         this.setOnTouchListener(this);
 
     }
