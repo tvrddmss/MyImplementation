@@ -24,7 +24,6 @@ import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.JustifyContent;
 
-import tvrddmss.mylistview.flowlayout.MyFlexboxLayoutManager;
 import tvrddmss.mylistview.flowlayout.MyFlexboxLayoutManagerJava;
 
 
