@@ -25,6 +25,7 @@ import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.JustifyContent;
 
 import tvrddmss.mylistview.flowlayout.MyFlexboxLayoutManager;
+import tvrddmss.mylistview.flowlayout.MyFlexboxLayoutManagerJava;
 
 
 /**
@@ -100,7 +101,7 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
      */
     public void setFlowLayout() {
         //设置主轴方向为横轴
-        MyFlexboxLayoutManager manager = new MyFlexboxLayoutManager(getContext(), FlexDirection.ROW);
+        MyFlexboxLayoutManagerJava manager = new MyFlexboxLayoutManagerJava(getContext(), FlexDirection.ROW);
         //设置item沿主轴方向的位置
         manager.setJustifyContent(JustifyContent.CENTER);
         //设置item 沿次轴方向的位置
@@ -119,14 +120,7 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
         paddingBottom = this.getPaddingBottom();
         paddingLeft = this.getPaddingLeft();
         paddingRight = this.getPaddingRight();
-
-        //设置主轴方向为横轴
-        MyFlexboxLayoutManager manager = new MyFlexboxLayoutManager(getContext(), FlexDirection.ROW);
-        //设置item沿主轴方向的位置
-        manager.setJustifyContent(JustifyContent.CENTER);
-        //设置item 沿次轴方向的位置
-        manager.setAlignItems(AlignItems.CENTER);
-        this.setLayoutManager(manager);
+        setFlowLayout();
 
         this.setOnTouchListener(this);
 
