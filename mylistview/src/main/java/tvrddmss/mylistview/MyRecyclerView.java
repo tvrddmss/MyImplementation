@@ -21,6 +21,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.JustifyContent;
+
+import esa.mylibrary.uicomponent.flowlayout.MyFlexboxLayoutManager;
+
 /**
  * @ProjectName: mydemo
  * @Package: esa.mylibrary.uicomponent
@@ -85,6 +91,24 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
     private int paddingRight;
     //endregion
 
+
+    /**
+     * @return void
+     * @description
+     * @author tvrddmss
+     * @time 2023/4/21 22:26
+     */
+    public void setFlowLayout() {
+        //设置主轴方向为横轴
+        MyFlexboxLayoutManager manager = new MyFlexboxLayoutManager(getContext(), FlexDirection.ROW);
+        //设置item沿主轴方向的位置
+        manager.setJustifyContent(JustifyContent.CENTER);
+        //设置item 沿次轴方向的位置
+        manager.setAlignItems(AlignItems.CENTER);
+        this.setLayoutManager(manager);
+    }
+
+
     //region 私有方法
 
     /**
@@ -96,8 +120,14 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
         paddingLeft = this.getPaddingLeft();
         paddingRight = this.getPaddingRight();
 
-        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext());
-        this.setLayoutManager(linearLayoutManager);
+        //设置主轴方向为横轴
+        MyFlexboxLayoutManager manager = new MyFlexboxLayoutManager(getContext(), FlexDirection.ROW);
+        //设置item沿主轴方向的位置
+        manager.setJustifyContent(JustifyContent.CENTER);
+        //设置item 沿次轴方向的位置
+        manager.setAlignItems(AlignItems.CENTER);
+        this.setLayoutManager(manager);
+
         this.setOnTouchListener(this);
 
     }
