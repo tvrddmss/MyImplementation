@@ -18,14 +18,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.JustifyContent;
 
-import esa.mylibrary.uicomponent.flowlayout.MyFlexboxLayoutManager;
+import tvrddmss.mylistview.flowlayout.MyFlexboxLayoutManager;
+
 
 /**
  * @ProjectName: mydemo
