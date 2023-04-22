@@ -102,9 +102,9 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
         //设置主轴方向为横轴
         MyFlexboxLayoutManagerJava manager = new MyFlexboxLayoutManagerJava(getContext(), FlexDirection.ROW);
         //设置item沿主轴方向的位置
-        manager.setJustifyContent(JustifyContent.CENTER);
+        manager.setJustifyContent(JustifyContent.FLEX_START);
         //设置item 沿次轴方向的位置
-        manager.setAlignItems(AlignItems.CENTER);
+        manager.setAlignItems(AlignItems.FLEX_START);
         this.setLayoutManager(manager);
     }
 
