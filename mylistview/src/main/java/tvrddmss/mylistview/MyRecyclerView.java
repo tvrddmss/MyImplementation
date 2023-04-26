@@ -254,6 +254,7 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
                     }
                     break;
                     case 1: {
+                        mWrapRecyclerAdapter.notifyDataSetChanged();
                         this.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
                         //不关闭动画-调用刷新
                         refreshData();
