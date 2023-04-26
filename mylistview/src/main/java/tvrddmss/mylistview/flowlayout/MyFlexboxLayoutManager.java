@@ -20,22 +20,22 @@ import com.google.android.flexbox.FlexboxLayoutManager;
  * @UpdateRemark: 更新说明
  * @Version: 1.0
  */
-public class MyFlexboxLayoutManagerJava extends FlexboxLayoutManager {
+public class MyFlexboxLayoutManager extends FlexboxLayoutManager {
 
 
-    public MyFlexboxLayoutManagerJava(Context context) {
+    public MyFlexboxLayoutManager(Context context) {
         super(context);
     }
 
-    public MyFlexboxLayoutManagerJava(Context context, int flexDirection) {
+    public MyFlexboxLayoutManager(Context context, int flexDirection) {
         super(context, flexDirection);
     }
 
-    public MyFlexboxLayoutManagerJava(Context context, int flexDirection, int flexWrap) {
+    public MyFlexboxLayoutManager(Context context, int flexDirection, int flexWrap) {
         super(context, flexDirection, flexWrap);
     }
 
-    public MyFlexboxLayoutManagerJava(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MyFlexboxLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

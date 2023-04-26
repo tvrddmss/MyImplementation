@@ -24,7 +24,7 @@ import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.JustifyContent;
 
-import tvrddmss.mylistview.flowlayout.MyFlexboxLayoutManagerJava;
+import tvrddmss.mylistview.flowlayout.MyFlexboxLayoutManager;
 
 
 /**
@@ -91,7 +91,6 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
     private int paddingRight;
     //endregion
 
-
     /**
      * @return void
      * @description
@@ -100,14 +99,46 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
      */
     public void setFlowLayout() {
         //设置主轴方向为横轴
-        MyFlexboxLayoutManagerJava manager = new MyFlexboxLayoutManagerJava(getContext(), FlexDirection.ROW);
+        MyFlexboxLayoutManager manager = new MyFlexboxLayoutManager(getContext(), FlexDirection.ROW);
         //设置item沿主轴方向的位置
         manager.setJustifyContent(JustifyContent.FLEX_START);
         //设置item 沿次轴方向的位置
         manager.setAlignItems(AlignItems.FLEX_START);
         this.setLayoutManager(manager);
-    }
 
+//        /* 对齐方式 */
+//        justify-content: center;     /* 居中排列 */
+//        justify-content: start;      /* 从行首开始排列 */
+//        justify-content: end;        /* 从行尾开始排列 */
+//        justify-content: flex-start; /* 从行首起始位置开始排列 */
+//        justify-content: flex-end;   /* 从行尾位置开始排列 */
+//        justify-content: left;       /* 一个挨一个在对齐容器得左边缘 */
+//        justify-content: right;      /* 元素以容器右边缘为基准，一个挨着一个对齐, */
+//
+//        /* 基线对齐 */
+//        justify-content: baseline;
+//        justify-content: first baseline;
+//        justify-content: last baseline;
+//
+//        /* 分配弹性元素方式 */
+//        justify-content: space-between;  /* 均匀排列每个元素
+//                                   首个元素放置于起点，末尾元素放置于终点 */
+//        justify-content: space-around;  /* 均匀排列每个元素
+//                                   每个元素周围分配相同的空间 */
+//        justify-content: space-evenly;  /* 均匀排列每个元素
+//                                   每个元素之间的间隔相等 */
+//        justify-content: stretch;       /* 均匀排列每个元素
+//                                   'auto'-sized 的元素会被拉伸以适应容器的大小 */
+//
+//        /* 溢出对齐方式 */
+//        justify-content: safe center;
+//        justify-content: unsafe center;
+//
+//        /* 全局值 */
+//        justify-content: inherit;
+//        justify-content: initial;
+//        justify-content: unset;
+    }
 
     //region 私有方法
 
@@ -119,11 +150,24 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
         paddingBottom = this.getPaddingBottom();
         paddingLeft = this.getPaddingLeft();
         paddingRight = this.getPaddingRight();
+
+//        FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
+//        this.setLayoutManager(flowLayoutManager);
+//
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+//        this.setLayoutManager(linearLayoutManager);//为recyclerview绑定布局  label为recyclerview
+
+
+//        DividerItemDecoration normalDividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
+//        this.addItemDecoration(normalDividerItemDecoration);
+//        this.setNestedScrollingEnabled(false);
+
         setFlowLayout();
 
         this.setOnTouchListener(this);
 
     }
+
 
     private void refreshData() {
         if (canRefresh && getListener() != null) {
