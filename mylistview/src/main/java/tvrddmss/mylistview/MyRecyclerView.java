@@ -229,7 +229,7 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
                             onTouchModel = -1;
                         } else {
                             header_text.setText("开始刷新");
-                            this.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+                            this.setPadding(paddingLeft, paddingTop + height - 200, paddingRight, paddingBottom);
                             //刷新模式
                             onTouchModel = 1;
                         }
