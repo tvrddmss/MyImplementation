@@ -144,7 +144,7 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
 //        justify-content: unset;
     }
 
-    //region 私有方法
+    //region 初始方法
 
     /**
      * 初始化
@@ -172,10 +172,13 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
 
     }
 
+    //endregion
 
+    //region 调用数据方法
     private void refreshData() {
         if (canRefresh && getListener() != null) {
             isloading = true;
+            showHeader();
             getListener().onRefresh();
         }
     }
@@ -867,4 +870,11 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
     }
 
     //endregion
+
+    //region 公有方法
+
+    public void refresh() {
+        refreshData();
+    }
+    //endregioin
 }
