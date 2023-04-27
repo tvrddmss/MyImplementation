@@ -80,6 +80,10 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
     private Boolean canRefresh = true;//允许下拉刷新标志
 
 
+    public boolean isIsloading() {
+        return isloading;
+    }
+
     private boolean isloading = false;//是否在数据加载请求中，不能操作
     private IOnScrollListener listener;//事件监听
     private float mLastY;//监听移动的位置
@@ -536,13 +540,13 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
             if (mWrapRecyclerAdapter != mAdapter)
                 mWrapRecyclerAdapter.notifyDataSetChanged();
 
+            //关闭更新限制
+            isloading = false;
             if (mAdapter.getItemCount() > 0) {
                 //关闭头部动画
                 closeHeader();
                 //关闭尾部动画
                 closeFooter();
-                //关闭更新限制
-                isloading = false;
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
