@@ -543,26 +543,20 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
             if (mWrapRecyclerAdapter != mAdapter)
                 mWrapRecyclerAdapter.notifyDataSetChanged();
 
+            //关闭头部动画
+            closeHeader();
+
+            //是否滑到底部
+            if (!MyRecyclerView.this.canScrollVertically(1)) {
+                if (canLoadMore && !isAllData()) {
+                    loadMoreData();
+                    return;
+                }
+            }
+            //关闭尾部动画
+            closeFooter();
             //关闭更新限制
             isloading = false;
-            if (mAdapter.getItemCount() > 0) {
-                //关闭头部动画
-                closeHeader();
-                //关闭尾部动画
-                closeFooter();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //是否滑到底部
-                        if (!MyRecyclerView.this.canScrollVertically(1)) {
-                            if (canLoadMore && !isAllData()) {
-                                loadMoreData();
-                            }
-                        }
-                    }
-                }, 250);
-            }
         }
 
         @Override
