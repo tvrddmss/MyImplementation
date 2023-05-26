@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -349,7 +350,6 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
     }
 
     public IOnScrollListener getListener() {
-
         return listener;
 
     }
@@ -365,10 +365,57 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
 
     //region 控制loading 效果
 
+    private void showNodata() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ViewGroup.LayoutParams params = nodata.getLayoutParams();
+                    if (mAdapter.getItemCount() == 0) {
+                        params.height = 200;
+                    } else {
+                        params.height = 0;
+                    }
+                    nodata.setLayoutParams(params);
+                } catch (Exception ex) {
+                }
+            }
+        }, 100);
+    }
+
+    private void hiddenNodata() {
+        try {
+            int height = nodata.getLayoutParams().height;
+            int dur = 0;
+            while (height > 0) {
+                height -= 10;
+                dur += 10;
+
+                if (height < 0) {
+                    height = 0;
+                }
+                final int h = height;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ViewGroup.LayoutParams params = nodata.getLayoutParams();
+                        params.height = h;
+                        nodata.setLayoutParams(params);
+                    }
+                }, dur);
+            }
+
+        } catch (Exception ex) {
+        }
+    }
+
     public void showHeader() {
         ViewGroup.LayoutParams params = header.getLayoutParams();
         params.height = 200;
         header.setLayoutParams(params);
+        hiddenNodata();
+
     }
 
     private void closeHeader() {
@@ -395,6 +442,7 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
             }
 
         }
+        showNodata();
     }
 
     private void closeFooter() {
@@ -456,6 +504,8 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
     private LinearLayout header = new LinearLayout(getContext());
     private TextView header_text = new TextView(getContext());
 
+    private TextView nodata = new TextView(getContext());
+
     private LinearLayout footerNoMore = new LinearLayout(getContext());
     private LinearLayout footerMore = new LinearLayout(getContext());
     // 包裹了一层的头部底部Adapter
@@ -502,6 +552,15 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
         }
 
         {
+            nodata.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    200));
+            nodata.setText("没有数据！");
+            nodata.setHeight(200);
+            nodata.setGravity(Gravity.CENTER);
+            mWrapRecyclerAdapter.addHeaderView(nodata);
+        }
+
+        {
             LinearLayout.LayoutParams layoutParams_footer = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     0);
             footerNoMore.setLayoutParams(layoutParams_footer);
@@ -539,24 +598,35 @@ public class MyRecyclerView extends RecyclerView implements RecyclerView.OnTouch
         @Override
         public void onChanged() {
             if (mAdapter == null) return;
-            // 观察者列表Adapter更新 包裹的也需要更新不然列表的notifyDataSetChanged没效果
-            if (mWrapRecyclerAdapter != mAdapter)
-                mWrapRecyclerAdapter.notifyDataSetChanged();
 
             //关闭头部动画
             closeHeader();
 
-            //是否滑到底部
-            if (!MyRecyclerView.this.canScrollVertically(1)) {
-                if (canLoadMore && !isAllData()) {
-                    loadMoreData();
-                    return;
-                }
-            }
             //关闭尾部动画
             closeFooter();
+
+            // 观察者列表Adapter更新 包裹的也需要更新不然列表的notifyDataSetChanged没效果
+            if (mWrapRecyclerAdapter != mAdapter) {
+                mWrapRecyclerAdapter.notifyDataSetChanged();
+            }
+
+
+            //是否滑到底部
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (!MyRecyclerView.this.canScrollVertically(1)) {
+                        if (canLoadMore && !isAllData()) {
+                            loadMoreData();
+                            return;
+                        }
+                    }
+                }
+            }, 200);//200是因为动画需要200
+
             //关闭更新限制
             isloading = false;
+
         }
 
         @Override
